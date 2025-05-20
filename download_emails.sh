@@ -74,7 +74,7 @@ echo "Listing available mailboxes..."
 echo "----------------------------------------"
 
 # List mailboxes and capture output
-MAILBOXES=($(python3 imapgrab3.py -l -S -s "$SERVER" -P "$PORT" -u "$EMAIL" -p "$PASSWORD" | grep -v "IMAP Grab" | grep -v "\-\-\-" | tr -d "b'" | tr -d "'"))
+MAILBOXES=($(python3 imapgrab3.py -q -l -S -s "$SERVER" -P "$PORT" -u "$EMAIL" -p "$PASSWORD" | tr -d "b'" | tr -d "'"))
 
 if [ ${#MAILBOXES[@]} -eq 0 ]; then
     echo "Failed to list mailboxes or no mailboxes found. Please check your connection settings."
@@ -90,7 +90,7 @@ echo "----------------------------------------"
 # Download each mailbox
 for mailbox in "${MAILBOXES[@]}"; do
     echo "Downloading mailbox: $mailbox"
-    python3 imapgrab3.py -d -S -s "$SERVER" -P "$PORT" -u "$EMAIL" -p "$PASSWORD" -m "$mailbox" -f "$OUTPUT_DIR"
+    python3 imapgrab3.py -q -d -S -s "$SERVER" -P "$PORT" -u "$EMAIL" -p "$PASSWORD" -m "$mailbox" -f "$OUTPUT_DIR"
 
     if [ $? -eq 0 ]; then
         echo "Successfully downloaded $mailbox"
