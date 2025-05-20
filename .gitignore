@@ -4,3 +4,4 @@ venv3/
 .DS_Store
 *.pyc
 imapgrab/
+downloaded_emails/
