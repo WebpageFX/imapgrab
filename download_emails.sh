@@ -17,6 +17,11 @@ prompt_if_empty() {
     fi
 }
 
+# Function to sanitize email for folder name
+sanitize_email() {
+    echo "$1" | tr '@' '_' | tr '.' '_' | tr '+' '_'
+}
+
 # Default values
 EMAIL=""
 PASSWORD=""
@@ -66,8 +71,10 @@ prompt_if_empty "PASSWORD" "Enter email password" "true"
 prompt_if_empty "SERVER" "Enter IMAP server (press Enter for default: secure.emailsrvr.com)" "false"
 prompt_if_empty "PORT" "Enter IMAP port (press Enter for default: 993)" "false"
 
-# Create output directory
-OUTPUT_DIR="downloaded_emails"
+# Create base output directory and email-specific subdirectory
+BASE_DIR="downloaded_emails"
+EMAIL_DIR=$(sanitize_email "$EMAIL")
+OUTPUT_DIR="$BASE_DIR/$EMAIL_DIR"
 mkdir -p "$OUTPUT_DIR"
 
 echo "Listing available mailboxes..."
@@ -86,6 +93,7 @@ printf '%s\n' "${MAILBOXES[@]}"
 echo "----------------------------------------"
 echo "Starting download of mailboxes..."
 echo "----------------------------------------"
+echo "Downloading to: $OUTPUT_DIR"
 
 # Download each mailbox
 for mailbox in "${MAILBOXES[@]}"; do
