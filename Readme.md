@@ -1,12 +1,25 @@
 # IMAP Grab
-## About
-This is a fork of the original [IMAP Grab](https://sourceforge.net/p/imapgrab/wiki/Home/) written by [Daniel Roesler (Diafygi)](https://sourceforge.net/u/diafygi/profile/) for Python 2. The fork does not include the GUI but works with Python 3.  
 
-ImapGrab is a cli and gui program (written in Python) that allows you to log into an IMAP server, list mailboxes, and download selected mailboxes to mbox or maildir files. It requires getmail 4.8.2 or higher. 
+## Quick Start
+
+1. Start the Dev Container
+2. Inside the container, run the following command to download the emails - provide the email address, password, server, and port.
+
+```
+# Call download_emails.sh with the parameters
+bash ./download_emails.sh -e "$EMAIL" -p "$PASSWORD" -s "$SERVER" -P "$PORT"
+```
+
+3. Check the downloaded emails in the `downloaded_emails` directory
+
+## About
+This is a fork of the original [IMAP Grab](https://sourceforge.net/p/imapgrab/wiki/Home/) written by [Daniel Roesler (Diafygi)](https://sourceforge.net/u/diafygi/profile/) for Python 2. The fork does not include the GUI but works with Python 3.
+
+ImapGrab is a cli and gui program (written in Python) that allows you to log into an IMAP server, list mailboxes, and download selected mailboxes to mbox or maildir files. It requires getmail 4.8.2 or higher.
 
 The basic functions of listing and downloading have been tested.
 No further development or maintenance is planned.
-The repository includes the cli code of the original 0.1.4 release for Python 2 as well as a version for Python 3 modified by me. I've set the version number to 0.2.0. 
+The repository includes the cli code of the original 0.1.4 release for Python 2 as well as a version for Python 3 modified by me. I've set the version number to 0.2.0.
 
 The code has been released under the [GPLv2](http://www.gnu.org/licenses/gpl-2.0.html) license.
 
@@ -84,4 +97,3 @@ python 3.5 or higher (tested with 3.7.7)
   - ```imapgrab -d -S -s imap.gmail.com -u username -p password -m "_ALL_, -_Gmail_"```
 - Download Gmail label "receipts"
   - ```imapgrab -d -S -s imap.gmail.com -u username -p password -m "receipts"```
-  
